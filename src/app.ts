@@ -1,14 +1,15 @@
-const http = require('node:http');
+const express = require('express')
+const app = express()
+const port = 3000
 
-http.createServer((request: any, response: any) => {
+app.get('/', function (req:any, res:any) {
+  res.send('Home page 1')
+})
 
-  console.log(request);
-  response.setHeader('Content-Disposition', 'attachment; filename=lista.csv');
-  response.writeHead(200, { 'Content-Type': 'application/csv' });
-  response.write('id, nombre\n');
-  response.write('1, allan\n');
-  response.write('2, noelia\n');
-  response.end();
-}).listen(8080);
+app.get('*', function (req:any, res:any) {
+  res.send('404 | Page not found')
+})
 
-console.log('Escuchando el puerto', 8080);
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
