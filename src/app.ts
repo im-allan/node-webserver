@@ -2,12 +2,15 @@ const express = require('express')
 const app = express()
 const port = 3000
 
+// Middleware
+app.use(express.static('src/public'));
+
 app.get('/', function (req:any, res:any) {
-  res.send('Home page 1')
+  res.send('index.html')
 })
 
 app.get('*', function (req:any, res:any) {
-  res.send('404 | Page not found')
+  res.sendFile(__dirname +'/public/404.html');
 })
 
 app.listen(port, () => {
